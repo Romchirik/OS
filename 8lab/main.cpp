@@ -17,7 +17,7 @@ int main(int argc, char* argv[])
         return 0;
     }
 
-    lock.l_type = F_RDLCK;
+    lock.l_type = F_WRLCK;
     lock.l_whence = SEEK_SET;
     lock.l_start = 0;
     lock.l_len = 0;
@@ -33,8 +33,7 @@ int main(int argc, char* argv[])
     lock.l_type = F_UNLCK;
 
     if (fcntl(file_descriptor, F_SETLK, &lock) == -1) {
-        perror("failed to lock file");
-        return 1;
+        perror("failed to unlock file");
     }
 
     close(file_descriptor);
